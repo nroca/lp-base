@@ -1,0 +1,56 @@
+// colors
+$color-comet: #555b6c;
+$color-pickled-bluewood: #2f384e;
+$color-white: #ffffff;
+$color-sail : #9fe6f8;
+$color-matisse : #16829e;
+$color-alto: #dddddd;
+$color-raven: #767c88;
+$color-black: #000000;
+$color-wild-sand: #f5f5f5;
+$color-shady-lady: #b2a6ae;
+$color-hot-pink: #ff66c7;
+
+$brand-primary: $color-pickled-bluewood;
+$brand-secondary: $color-comet;
+
+
+// typography
+$font-family-sans-serif:  "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+//
+// container overrides for non responsive
+$grid-gutter-width:            30px !default;
+$container-large-desktop:      (1140px + $grid-gutter-width) !default;
+$container-lg:                 $container-large-desktop !default;
+$container-tablet:             $container-large-desktop;
+$container-sm:                 $container-lg;
+$container-desktop:            $container-large-desktop;
+$container-md:                 $container-lg;
+
+// buttons
+$btn-default-color:              #000;
+$btn-default-bg:                 #fff;
+$btn-default-border:             #000;
+
+// border radius
+$btn-border-radius-base:         0;
+$btn-border-radius-large:        0;
+$btn-border-radius-small:        0;
+
+// tabs
+$nav-tabs-border-color:                     transparent;
+$nav-tabs-link-hover-border-color:          transparent;
+$nav-tabs-active-link-hover-bg:             transparent;
+$nav-tabs-active-link-hover-color:          $color-white;
+$nav-tabs-active-link-hover-border-color:   transparent;
+$nav-tabs-justified-link-border-color:            transparent;
+$nav-tabs-justified-active-link-border-color:     transparent;
+
+// media query
+$screen-sm: 0;
+$screen-md: 0;
+$screen-lg: 0;
+$screen-xs-min: 0;
+$screen-md-min: 0;
+$screen-lg-min: 0;
