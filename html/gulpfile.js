@@ -19,6 +19,8 @@ var runSequence  = require('run-sequence');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var uglify       = require('gulp-uglify');
+var inlinesource = require('gulp-inline-source');
+var htmlreplace   = require('gulp-html-replace');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./assets/manifest.json');
@@ -109,7 +111,17 @@ var cssTasks = function(filename) {
     })
     .pipe(minifyCss, {
       advanced: false,
-      rebase: false
+      rebase: false,
+      compatibility: 'ie7,' +
+        '-units.ch,' +
+        '-units.in,' +
+        '-units.pc,' +
+        '-units.pt,' +
+        '-units.rem,' +
+        '-units.vh,' +
+        '-units.vm,' +
+        '-units.vmax,' +
+        '-units.vmin'
     })
     .pipe(function() {
       return gulpif(enabled.rev, rev());
@@ -236,6 +248,22 @@ gulp.task('jshint', function() {
     .pipe(gulpif(enabled.failJSHint, jshint.reporter('fail')));
 });
 
+// ### InlineSource
+gulp.task('inlinesource', function () {
+  return gulp.src('./*.html')
+    .pipe(inlinesource())
+    .pipe(gulp.dest(path.dist));
+});
+
+// ### htmlreplace
+gulp.task('htmlreplace', function () {
+  return gulp.src('./dist/*.html')
+    .pipe(htmlreplace({
+      'clean': ''
+    }))
+    .pipe(gulp.dest('./dist'));
+});
+
 // ### Clean
 // `gulp clean` - Deletes the build folder entirely.
 gulp.task('clean', require('del').bind(null, [path.dist]));
@@ -257,7 +285,6 @@ gulp.task('watch', function() {
       blacklist: ['/wp-admin/**']
     }
   });
-  gulp.watch([path.source + 'styles/**/*'], ['styles']);
   gulp.watch([path.source + 'scripts/**/*'], ['jshint', 'scripts']);
   gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
   gulp.watch([path.source + 'images/**/*'], ['images']);
@@ -271,6 +298,8 @@ gulp.task('build', function(callback) {
   runSequence('styles',
               'scripts',
               ['fonts', 'images'],
+              'inlinesource',
+              'htmlreplace',
               callback);
 });
 
