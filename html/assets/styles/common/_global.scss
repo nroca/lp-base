@@ -1,5 +1,16 @@
-* {
+#content_container.content_container ,
+#content_container.content_container * {
   box-sizing: border-box;
+}
+
+.no-margin-top {
+  margin-top: 0 !important;
+}
+
+img {
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
 }
 
 .content_container {
